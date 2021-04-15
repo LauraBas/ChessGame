@@ -1,10 +1,10 @@
 import java.util.HashMap;
 
 public class Board {
-
-    HashMap<String, String> board_dict = new HashMap<>();
+    HashMap<String, String> board_dict;
 
     public Board() {
+        board_dict = new HashMap<>();
         board_dict.put("a1", "white-rook");
         board_dict.put("b1", "white-knight");
         board_dict.put("c1", "white-bishop");
@@ -43,8 +43,24 @@ public class Board {
     }
 
     String show(String position) {
+        if (board_dict.get(position) == null) {
+            return "-";
+        }
         return board_dict.get(position);
     }
 
 
+    public boolean move(String position, String movement) {
+      String piece = board_dict.get(position);
+      String[] name = piece.split("-");
+      String namePiece = name[1];
+
+      if(namePiece == "pawn") {
+          Piece pawn = new Pawn(position, movement);
+          pawn.move();
+      }
+      board_dict.remove(position, piece);
+      board_dict.put(movement, piece);
+      return true;
+    }
 }
