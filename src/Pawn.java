@@ -4,10 +4,10 @@ public class Pawn implements Piece {
     String movement;
     String position;
     String color;
-    String x;
+    char x;
     Board board;
     int y;
-    String xMov;
+    char xMov;
     int yMov;
 
     public Pawn(String position, String movement, String color, Board board) {
@@ -15,15 +15,18 @@ public class Pawn implements Piece {
         this.movement = movement;
         this.color = color;
         String[] positionData =  this.position.split("");
-        this.x = positionData[0];
+        this.x = positionData[0].charAt(0);
         this.y = parseInt(positionData[1]);
         String[] movementData =  this.movement.split("");
-        this.xMov = movementData[0];
+        this.xMov = movementData[0].charAt(0);
         this.yMov =  parseInt(movementData[1]);
         this.board = board;
     }
 
     public boolean move() {
+        if (canEat()) {
+            return true;
+        }
         if (isPositionAvailable()) {
            if (isWhite()) {
                if(isWhiteFirstMove()) {
@@ -44,6 +47,10 @@ public class Pawn implements Piece {
 
     }
 
+    private boolean canEat() {
+        return (Math.abs(this.y - this.yMov) == 1 && Math.abs(this.x - this.xMov) == 1);
+    }
+
     private boolean isPositionAvailable() {
         return this.board.show(this.movement).equals("-");
     }
@@ -53,19 +60,19 @@ public class Pawn implements Piece {
     }
 
     private boolean canBlackMove() {
-        return (this.x.equals(this.xMov)) && (this.y - this.yMov == 1);
+        return (this.x == this.xMov) && (this.y - this.yMov == 1);
     }
 
     private boolean isBlackFirstMove() {
-        return (this.x.equals(this.xMov)) && this.y == 7 && this.yMov == 5;
+        return (this.x == this.xMov) && this.y == 7 && this.yMov == 5;
     }
 
     private boolean canWhiteMove() {
-        return (this.x.equals(this.xMov)) && (this.yMov - this.y == 1);
+        return (this.x == this.xMov) && (this.yMov - this.y == 1);
     }
 
     private boolean isWhiteFirstMove() {
-        return (this.x.equals(this.xMov)) && this.y == 2 && this.yMov == 4;
+        return (this.x == this.xMov) && this.y == 2 && this.yMov == 4;
     }
 
 }

@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -68,6 +69,16 @@ class PawnTest {
         assertTrue( b.move("a4", "a5"));
         assertTrue(b.move("a5", "a6"));
         assertFalse(b.move("a6", "a7"));
+    }
+
+    @Test
+    void shouldReturnTrueIfCanEatAPiece() {
+        Board b = new Board();
+        b.move("a2", "a4");
+        b.move("b7", "b5");
+        Assertions.assertEquals("black-pawn", b.show("b5"));
+        assertTrue( b.move("a4", "b5"));
+        Assertions.assertEquals("white-pawn", b.show("b5"));
     }
 
 
