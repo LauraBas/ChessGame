@@ -5,14 +5,14 @@ public class Board {
 
     public Board() {
         board_dict = new HashMap<>();
-        board_dict.put("a1", "white-rook");
-        board_dict.put("b1", "white-knight");
-        board_dict.put("c1", "white-bishop");
-        board_dict.put("d1", "white-queen");
-        board_dict.put("e1", "white-king");
-        board_dict.put("f1", "white-bishop");
-        board_dict.put("g1", "white-knight");
-        board_dict.put("h1", "white-rook");
+        board_dict.put("a1","white-rook");
+        board_dict.put("b1","white-knight");
+        board_dict.put("c1","white-bishop");
+        board_dict.put("d1","white-queen");
+        board_dict.put("e1","white-king");
+        board_dict.put("f1","white-bishop");
+        board_dict.put("g1","white-knight");
+        board_dict.put("h1","white-rook");
         board_dict.put("a2","white-pawn");
         board_dict.put("b2","white-pawn");
         board_dict.put("c2","white-pawn");
@@ -49,11 +49,12 @@ public class Board {
         return board_dict.get(position);
     }
 
-
     public boolean move(String position, String movement) {
       String piece = board_dict.get(position);
+      String[] result = piece.split("-");
+      String color = result[0];
 
-      Piece pawn = new Pawn(position, movement);
+      Piece pawn = new Pawn(position, movement, color);
       if (pawn.move(this.board_dict)) {
           board_dict.remove(position, piece);
           board_dict.put(movement, piece);

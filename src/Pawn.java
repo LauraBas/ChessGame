@@ -5,10 +5,12 @@ import static java.lang.Integer.parseInt;
 public class Pawn implements Piece {
     String movement;
     String position;
+    String color;
 
-    public Pawn(String position, String movement) {
+    public Pawn(String position, String movement, String color) {
         this.position = position;
         this.movement = movement;
+        this.color = color;
     }
 
     public boolean move(HashMap<String, String> board_dict) {
@@ -19,10 +21,18 @@ public class Pawn implements Piece {
        String xMov = movement[0];
        int yMov =  parseInt(movement[1]);
 
-       if ((x.equals(xMov)) && (yMov - y == 1)){
-            return true;
+       if(this.color.equals("white")) {
+           if ((x.equals(xMov)) && (yMov - y == 1)){
+                return true;
+           } else {
+               return false;
+           }
        } else {
-           return false;
+           if ((x.equals(xMov)) && (y - yMov == 1)){
+               return true;
+           } else {
+               return false;
+           }
        }
     }
 
