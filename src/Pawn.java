@@ -13,7 +13,7 @@ public class Pawn implements Piece {
         this.color = color;
     }
 
-    public boolean move(HashMap<String, String> board_dict) {
+    public boolean move() {
        String[] position =  this.position.split("");
        String x = position[0];
        int y = parseInt(position[1]);
@@ -21,7 +21,7 @@ public class Pawn implements Piece {
        String xMov = movement[0];
        int yMov =  parseInt(movement[1]);
 
-       if(this.color.equals("white")) {
+       if (this.color.equals("white")) {
            if((x.equals(xMov)) && y == 2 && yMov == 4) {
                return true;
            }
