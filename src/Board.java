@@ -39,7 +39,6 @@ public class Board {
         board_dict.put("g7","black-pawn");
         board_dict.put("h7","black-pawn");
 
-
     }
 
     String show(String position) {
@@ -55,8 +54,8 @@ public class Board {
       String color = result[0];
 
       if (result[1].equals("pawn")) {
-          Piece pawn = new Pawn(position, movement, color);
-          if (pawn.move(this)) {
+          Piece pawn = new Pawn(position, movement, color, this);
+          if (pawn.move()) {
               board_dict.remove(position, piece);
               board_dict.put(movement, piece);
               return true;

@@ -5,11 +5,12 @@ public class Pawn implements Piece {
     String position;
     String color;
     String x;
+    Board board;
     int y;
     String xMov;
     int yMov;
 
-    public Pawn(String position, String movement, String color) {
+    public Pawn(String position, String movement, String color, Board board) {
         this.position = position;
         this.movement = movement;
         this.color = color;
@@ -19,10 +20,11 @@ public class Pawn implements Piece {
         String[] movementData =  this.movement.split("");
         this.xMov = movementData[0];
         this.yMov =  parseInt(movementData[1]);
+        this.board = board;
     }
 
-    public boolean move(Board board) {
-        if (isPositionAvailable(board)) {
+    public boolean move() {
+        if (isPositionAvailable()) {
            if (isWhite()) {
                if(isWhiteFirstMove()) {
                    return true;
@@ -42,8 +44,8 @@ public class Pawn implements Piece {
 
     }
 
-    private boolean isPositionAvailable(Board board) {
-        return board.show(this.movement).equals("-");
+    private boolean isPositionAvailable() {
+        return this.board.show(this.movement).equals("-");
     }
 
     private boolean isWhite() {
