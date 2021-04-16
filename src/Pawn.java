@@ -22,8 +22,7 @@ public class Pawn implements Piece {
     }
 
     public boolean move(Board board) {
-        if (board.show(this.movement).equals("-")) {
-
+        if (isPositionAvailable(board)) {
            if (isWhite()) {
                if(isWhiteFirstMove()) {
                    return true;
@@ -41,6 +40,10 @@ public class Pawn implements Piece {
             return false;
         }
 
+    }
+
+    private boolean isPositionAvailable(Board board) {
+        return board.show(this.movement).equals("-");
     }
 
     private boolean isWhite() {
