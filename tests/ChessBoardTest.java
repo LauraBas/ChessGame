@@ -2,11 +2,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BoardTest {
+class ChessBoardTest {
 
     @Test
     void shouldShowPiecesByPosition() {
-        Board b = new Board();
+        ChessBoard b = new ChessBoard();
         assertEquals( "white-pawn", b.show("a2"));
         assertEquals( "black-pawn", b.show("a7"));
         assertEquals( "white-king", b.show("e1"));
