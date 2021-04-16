@@ -81,5 +81,16 @@ class PawnTest {
         Assertions.assertEquals("white-pawn", b.show("b5"));
     }
 
+    @Test
+    void shouldReturnFalseIfCanNotEatSameColorPiece() {
+        Board b = new Board();
+        b.move("a2", "a3");
+        b.move("b2", "b4");
+        assertFalse(b.move("a3", "b4"));
+        b.move("a7", "a6");
+        b.move("b7", "b5");
+        assertFalse(b.move("a6", "b5"));
+    }
+
 
 }

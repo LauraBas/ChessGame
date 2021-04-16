@@ -24,7 +24,7 @@ public class Pawn implements Piece {
     }
 
     public boolean move() {
-        if (canEat()) {
+        if (!isPositionAvailable() && canEat()) {
             return true;
         }
         if (isPositionAvailable()) {
@@ -47,8 +47,14 @@ public class Pawn implements Piece {
 
     }
 
+    private boolean isOpponent() {
+        String piece = this.board.show(this.movement);
+        String[] result = piece.split("-");
+        String opponent = result[0];
+        return !opponent.equals(this.color);
+    }
     private boolean canEat() {
-        return (Math.abs(this.y - this.yMov) == 1 && Math.abs(this.x - this.xMov) == 1);
+        return (isOpponent() && Math.abs(this.y - this.yMov) == 1 && Math.abs(this.x - this.xMov) == 1);
     }
 
     private boolean isPositionAvailable() {
