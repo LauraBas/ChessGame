@@ -28,21 +28,13 @@ public class Pawn implements Piece {
                if(isWhiteFirstMove()) {
                    return true;
                }
-               else if (canWhiteMove()){
-                    return true;
-               } else {
-                   return false;
-               }
+               else return canWhiteMove();
            }
            else {
                if (isBlackFirstMove()) {
                    return true;
                }
-               else if (canBlackMove()){
-                   return true;
-               } else {
-                   return false;
-               }
+               else return canBlackMove();
            }
         }
         else {
