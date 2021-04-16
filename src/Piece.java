@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public interface Piece {
-    public void move();
+    public boolean move(HashMap<String, String> board_dict);
 }

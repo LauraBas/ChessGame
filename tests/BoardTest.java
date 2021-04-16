@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
@@ -15,14 +14,22 @@ class BoardTest {
     }
 
     @Test
-    void shouldMovePiece() {
+    void shouldMovePieceAndReturnTrueIfMovementIsAllowed() {
         Board b = new Board();
         assertEquals( "white-pawn", b.show("a2"));
         assertEquals( "-", b.show("a3"));
-        boolean moveOk = b.move("a2", "a3");
-        assertTrue(moveOk);
+        assertTrue(b.move("a2", "a3"));
+        assertTrue(b.move("b3", "b4"));
         assertEquals( "white-pawn", b.show("a3"));
         assertEquals( "-", b.show("a2"));
+    }
+
+    @Test
+    void shouldReturnFalseIfMovementIsNotAllowed() {
+        Board b = new Board();
+        assertFalse( b.move("a2", "c3"));
+        assertFalse( b.move("b2", "b6"));
+        assertFalse( b.move("c2", "a3"));
     }
 
 }

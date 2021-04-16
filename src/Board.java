@@ -52,15 +52,17 @@ public class Board {
 
     public boolean move(String position, String movement) {
       String piece = board_dict.get(position);
-      String[] name = piece.split("-");
-      String namePiece = name[1];
 
-      if(namePiece == "pawn") {
-          Piece pawn = new Pawn(position, movement);
-          pawn.move();
+      Piece pawn = new Pawn(position, movement);
+      if (pawn.move(this.board_dict)) {
+          board_dict.remove(position, piece);
+          board_dict.put(movement, piece);
+          return true;
+      } else {
+       return false;
       }
-      board_dict.remove(position, piece);
-      board_dict.put(movement, piece);
-      return true;
-    }
+  }
+
+
+
 }
