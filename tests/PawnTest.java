@@ -92,5 +92,20 @@ class PawnTest {
         assertFalse(b.move("a6", "b5"));
     }
 
+    @Test
+    void shouldReturnFalseIfCanNotEatBehind() {
+        Board b = new Board();
+        b.move("a2", "a4");
+        b.move("b7", "b5");
+        b.move("a4", "a5");
+        b.move("b5", "b4");
+        assertFalse(b.move("a5", "b4"));
+        b.move("f7", "f5");
+        b.move("g2", "g4");
+        b.move("f5", "f4");
+        b.move("g4", "g5");
+        assertFalse(b.move("f4", "g5"));
+    }
+
 
 }

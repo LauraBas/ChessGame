@@ -54,7 +54,9 @@ public class Pawn implements Piece {
         return !opponent.equals(this.color);
     }
     private boolean canEat() {
-        return (isOpponent() && Math.abs(this.y - this.yMov) == 1 && Math.abs(this.x - this.xMov) == 1);
+        if (isWhite()) {
+            return (isOpponent() && this.y - this.yMov == -1 && Math.abs(this.x - this.xMov) == 1);
+        } else return (isOpponent() && this.y - this.yMov == 1 && Math.abs(this.x - this.xMov) == 1);
     }
 
     private boolean isPositionAvailable() {
