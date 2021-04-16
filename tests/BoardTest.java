@@ -19,8 +19,17 @@ class BoardTest {
         assertEquals( "white-pawn", b.show("a2"));
         assertEquals( "-", b.show("a3"));
         assertTrue(b.move("a2", "a3"));
-        assertTrue(b.move("b3", "b4"));
         assertEquals( "white-pawn", b.show("a3"));
+        assertEquals( "-", b.show("a2"));
+    }
+
+    @Test
+    void shouldWhitePawnMoveTwiceIfFirstMovement() {
+        Board b = new Board();
+        assertEquals( "white-pawn", b.show("a2"));
+        assertEquals( "-", b.show("a3"));
+        assertTrue(b.move("a2", "a4"));
+        assertEquals( "white-pawn", b.show("a4"));
         assertEquals( "-", b.show("a2"));
     }
 
@@ -43,12 +52,24 @@ class BoardTest {
     }
 
     @Test
+    void shouldBlackPawnMoveTwiceIfFirstMovement() {
+        Board b = new Board();
+        assertEquals( "black-pawn", b.show("a7"));
+        assertEquals( "-", b.show("a5"));
+        assertTrue(b.move("a7", "a5"));
+        assertEquals( "black-pawn", b.show("a5"));
+        assertEquals( "-", b.show("a7"));
+    }
+
+    @Test
     void shouldReturnFalseIfMovementIsNotAllowedForBlackPawn() {
         Board b = new Board();
         assertFalse( b.move("a7", "c8"));
         assertFalse( b.move("b7", "b9"));
         assertFalse( b.move("c7", "a5"));
     }
+
+
 
 
 }

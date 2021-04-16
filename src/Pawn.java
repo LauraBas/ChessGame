@@ -22,13 +22,19 @@ public class Pawn implements Piece {
        int yMov =  parseInt(movement[1]);
 
        if(this.color.equals("white")) {
-           if ((x.equals(xMov)) && (yMov - y == 1)){
+           if((x.equals(xMov)) && y == 2 && yMov == 4) {
+               return true;
+           }
+           else if ((x.equals(xMov)) && (yMov - y == 1)){
                 return true;
            } else {
                return false;
            }
        } else {
-           if ((x.equals(xMov)) && (y - yMov == 1)){
+           if((x.equals(xMov)) && y == 7 && yMov == 5) {
+               return true;
+           }
+           else if ((x.equals(xMov)) && (y - yMov == 1)){
                return true;
            } else {
                return false;
