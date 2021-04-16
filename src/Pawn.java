@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 import static java.lang.Integer.parseInt;
 
 public class Pawn implements Piece {
