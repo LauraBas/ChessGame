@@ -1,4 +1,4 @@
 
 public interface Piece {
-    public boolean move();
+    public boolean move(Board board);
 }

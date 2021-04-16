@@ -60,5 +60,15 @@ class PawnTest {
         assertFalse( b.move("c7", "a5"));
     }
 
+    @Test
+    void shouldReturnFalseIfMovementIsBlockedWithAnotherPiece() {
+        Board b = new Board();
+        assertTrue(b.move("a2", "a3"));
+        assertTrue(b.move("a3", "a4"));
+        assertTrue( b.move("a4", "a5"));
+        assertTrue(b.move("a5", "a6"));
+        assertFalse(b.move("a6", "a7"));
+    }
+
 
 }

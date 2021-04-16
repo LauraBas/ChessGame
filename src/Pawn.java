@@ -4,41 +4,71 @@ public class Pawn implements Piece {
     String movement;
     String position;
     String color;
+    String x;
+    int y;
+    String xMov;
+    int yMov;
 
     public Pawn(String position, String movement, String color) {
         this.position = position;
         this.movement = movement;
         this.color = color;
+        String[] positionData =  this.position.split("");
+        this.x = positionData[0];
+        this.y = parseInt(positionData[1]);
+        String[] movementData =  this.movement.split("");
+        this.xMov = movementData[0];
+        this.yMov =  parseInt(movementData[1]);
     }
 
-    public boolean move() {
-       String[] position =  this.position.split("");
-       String x = position[0];
-       int y = parseInt(position[1]);
-       String[] movement =  this.movement.split("");
-       String xMov = movement[0];
-       int yMov =  parseInt(movement[1]);
+    public boolean move(Board board) {
+        if (board.show(this.movement).equals("-")) {
 
-       if (this.color.equals("white")) {
-           if((x.equals(xMov)) && y == 2 && yMov == 4) {
-               return true;
+           if (isWhite()) {
+               if(isWhiteFirstMove()) {
+                   return true;
+               }
+               else if (canWhiteMove()){
+                    return true;
+               } else {
+                   return false;
+               }
            }
-           else if ((x.equals(xMov)) && (yMov - y == 1)){
-                return true;
-           } else {
-               return false;
+           else {
+               if (isBlackFirstMove()) {
+                   return true;
+               }
+               else if (canBlackMove()){
+                   return true;
+               } else {
+                   return false;
+               }
            }
-       } else {
-           if((x.equals(xMov)) && y == 7 && yMov == 5) {
-               return true;
-           }
-           else if ((x.equals(xMov)) && (y - yMov == 1)){
-               return true;
-           } else {
-               return false;
-           }
-       }
+        }
+        else {
+            return false;
+        }
+
     }
 
+    private boolean isWhite() {
+        return this.color.equals("white");
+    }
+
+    private boolean canBlackMove() {
+        return (this.x.equals(this.xMov)) && (this.y - this.yMov == 1);
+    }
+
+    private boolean isBlackFirstMove() {
+        return (this.x.equals(this.xMov)) && this.y == 7 && this.yMov == 5;
+    }
+
+    private boolean canWhiteMove() {
+        return (this.x.equals(this.xMov)) && (this.yMov - this.y == 1);
+    }
+
+    private boolean isWhiteFirstMove() {
+        return (this.x.equals(this.xMov)) && this.y == 2 && this.yMov == 4;
+    }
 
 }

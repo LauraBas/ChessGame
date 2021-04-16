@@ -54,13 +54,17 @@ public class Board {
       String[] result = piece.split("-");
       String color = result[0];
 
-      Piece pawn = new Pawn(position, movement, color);
-      if (pawn.move()) {
-          board_dict.remove(position, piece);
-          board_dict.put(movement, piece);
-          return true;
+      if (result[1].equals("pawn")) {
+          Piece pawn = new Pawn(position, movement, color);
+          if (pawn.move(this)) {
+              board_dict.remove(position, piece);
+              board_dict.put(movement, piece);
+              return true;
+          } else {
+           return false;
+          }
       } else {
-       return false;
+          return false;
       }
   }
 
