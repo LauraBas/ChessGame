@@ -1,3 +1,5 @@
+package pieces;
+
 import board.ChessBoard;
 import org.junit.jupiter.api.Test;
 

@@ -70,8 +70,8 @@ public class Knight implements Piece {
     }
 
     public boolean isOpponent() {
-        if (!this.board.show(this.movement).equals("-")) {
-            String piece = this.board.show(this.movement);
+        String piece = this.board.show(this.movement);
+        if (!piece.equals("-")) {
             String[] result = piece.split("-");
             String opponent = result[0];
             return !opponent.equals(this.color);
