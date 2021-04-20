@@ -62,9 +62,20 @@ public class ChessBoard implements Board {
           } else {
            return false;
           }
-      } else {
-          return false;
       }
+
+      if (result[1].equals("knight")) {
+        Piece knight = new Knight(position, movement, color, this);
+        if (knight.move()) {
+            board_dict.remove(position, piece);
+            board_dict.put(movement, piece);
+            return true;
+        } else {
+            return false;
+        }
+     } else {
+        return false;
+     }
   }
 
 
