@@ -1,3 +1,9 @@
+package board;
+
+import pieces.Knight;
+import pieces.Pawn;
+import pieces.Piece;
+
 import java.util.HashMap;
 
 public class ChessBoard implements Board {
@@ -49,35 +55,28 @@ public class ChessBoard implements Board {
     }
 
     public boolean move(String position, String movement) {
-      String piece = board_dict.get(position);
-      String[] result = piece.split("-");
-      String color = result[0];
-
-      if (result[1].equals("pawn")) {
-          Piece pawn = new Pawn(position, movement, color, this);
-          if (pawn.move()) {
-              board_dict.remove(position, piece);
-              board_dict.put(movement, piece);
+      String pieceData = board_dict.get(position);
+      String[] result = pieceData.split("-");
+          Piece piece = getPiece(result, position, movement);
+          if (piece.canMove()) {
+              board_dict.remove(position, pieceData);
+              board_dict.put(movement, pieceData);
               return true;
           } else {
            return false;
           }
-      }
-
-      if (result[1].equals("knight")) {
-        Piece knight = new Knight(position, movement, color, this);
-        if (knight.move()) {
-            board_dict.remove(position, piece);
-            board_dict.put(movement, piece);
-            return true;
-        } else {
-            return false;
-        }
-     } else {
-        return false;
-     }
   }
 
+    private Piece getPiece(String[] result, String position, String movement) {
+        String color = result[0];
+        if (result[1].equals("pawn")) {
+            return new Pawn(position, movement, color, this);
+        }
+        if (result[1].equals("knight")) {
+            return new Knight(position, movement, color, this);
+        }
+        throw new Error("No piece found!!! BAD ERROR");
+    }
 
 
 }

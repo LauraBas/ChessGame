@@ -1,3 +1,7 @@
+package pieces;
+
+import board.Board;
+
 import static java.lang.Integer.parseInt;
 
 public class Knight implements Piece {
@@ -24,7 +28,7 @@ public class Knight implements Piece {
         this.board = board;
     }
 
-    public boolean move() {
+    public boolean canMove() {
         return isPositionAvailable() || canEat();
 
     }

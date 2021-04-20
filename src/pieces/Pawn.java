@@ -1,3 +1,7 @@
+package pieces;
+
+import board.Board;
+
 import static java.lang.Integer.parseInt;
 
 public class Pawn implements Piece {
@@ -23,7 +27,7 @@ public class Pawn implements Piece {
         this.board = board;
     }
 
-    public boolean move() {
+    public boolean canMove() {
         if (!isPositionAvailable() && canEat()) {
             return true;
         }
