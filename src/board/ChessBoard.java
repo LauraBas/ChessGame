@@ -1,8 +1,7 @@
 package board;
 
-import pieces.Knight;
-import pieces.Pawn;
 import pieces.Piece;
+import pieces.PieceFactory;
 
 import java.util.HashMap;
 
@@ -57,7 +56,8 @@ public class ChessBoard implements Board {
     public boolean move(String position, String movement) {
       String pieceData = board_dict.get(position);
       String[] result = pieceData.split("-");
-          Piece piece = getPiece(result, position, movement);
+      PieceFactory pieceFactory =  new PieceFactory();
+      Piece piece =  pieceFactory.getPiece(result,  position, movement, this);
           if (piece.canMove()) {
               board_dict.remove(position, pieceData);
               board_dict.put(movement, pieceData);
@@ -66,17 +66,5 @@ public class ChessBoard implements Board {
            return false;
           }
   }
-
-    private Piece getPiece(String[] result, String position, String movement) {
-        String color = result[0];
-        if (result[1].equals("pawn")) {
-            return new Pawn(position, movement, color, this);
-        }
-        if (result[1].equals("knight")) {
-            return new Knight(position, movement, color, this);
-        }
-        throw new Error("No piece found!!! BAD ERROR");
-    }
-
 
 }
