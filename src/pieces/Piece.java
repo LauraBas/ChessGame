@@ -1,5 +1,7 @@
 package pieces;
 
 public interface Piece {
-    public boolean canMove();
+    boolean canMove();
+    boolean canEat();
+    boolean isOpponent();
 }

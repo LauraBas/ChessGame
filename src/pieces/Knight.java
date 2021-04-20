@@ -36,7 +36,7 @@ public class Knight implements Piece {
         return this.board.show(this.movement).equals("-") && isMovementAllowed();
     }
 
-    private boolean canEat() {
+    public boolean canEat() {
         return (isOpponent() && isMovementAllowed());
 
     }
@@ -69,7 +69,7 @@ public class Knight implements Piece {
         else return false;
     }
 
-    private boolean isOpponent() {
+    public boolean isOpponent() {
         if (!this.board.show(this.movement).equals("-")) {
             String piece = this.board.show(this.movement);
             String[] result = piece.split("-");
