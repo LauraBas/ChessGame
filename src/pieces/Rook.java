@@ -46,9 +46,9 @@ public class Rook implements Piece {
                 return true;
             }
             if(!isOneMovement()){
-                if (this.x < this.xMov && this.y == this.yMov) {
+                if (this.x < this.xMov - 1 && this.y == this.yMov) {
                     boolean isEmptyBox = true;
-                    while (this.x < this.xMov && isEmptyBox) {
+                    while (this.x < this.xMov - 1 && isEmptyBox) {
                         this.x += 1;
                         String a = String.valueOf(x);
                         String b = String.valueOf(y);
@@ -61,7 +61,7 @@ public class Rook implements Piece {
 
                 if (this.x > this.xMov  && this.y == this.yMov) {
                     boolean isEmptyBox = true;
-                    while (this.x > this.xMov && isEmptyBox) {
+                    while (this.x > this.xMov + 1 && isEmptyBox) {
                         this.x -= 1;
                         String a = String.valueOf(x);
                         String b = String.valueOf(y);
@@ -73,7 +73,7 @@ public class Rook implements Piece {
 
                 if (this.y < this.yMov && this.x == this.xMov) {
                     boolean isEmptyBox = true;
-                    while( this.y < this.yMov && isEmptyBox) {
+                    while( this.y < this.yMov - 1 && isEmptyBox) {
                         this.y += 1;
                         String a = String.valueOf(x);
                         String b = String.valueOf(y);
@@ -84,9 +84,9 @@ public class Rook implements Piece {
 
                 }
 
-                if (this.y > this.yMov && this.x == this.xMov) {
+                if (this.y > this.yMov  && this.x == this.xMov) {
                     boolean isEmptyBox = true;
-                    while (this.y > this.yMov && isEmptyBox) {
+                    while (this.y > this.yMov + 1 && isEmptyBox) {
                         this.y -= 1;
                         String a = String.valueOf(x);
                         String b = String.valueOf(y);
@@ -100,13 +100,13 @@ public class Rook implements Piece {
         return false;
     }
 
-
     public boolean isOpponentInDestination() {
         if(this.board.isSquareEmpty(this.movement)) {
             return false;
         }
         return !this.board.getColorAtSquare(this.movement).equals(this.color);
     }
+
     private boolean isFinalPositionAllowed() {
         return this.board.isSquareEmpty(this.movement) || isOpponentInDestination();
     }

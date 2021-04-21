@@ -41,7 +41,7 @@ class BishopTest {
     }
 
     @Test
-    void shouldNotEatIfAllied() {
+    void shouldNotEatIfAlly() {
         ChessBoard b = new ChessBoard();
         assertEquals( "white-bishop", b.show("c1"));
         assertFalse(b.move("c1","d2"));
