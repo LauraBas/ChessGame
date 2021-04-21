@@ -63,10 +63,7 @@ public class Knight implements Piece {
         if (this.y - this.yMov == 2 && this.x - this.xMov == 1) {
             return true;
         }
-        if (this.y - this.yMov == 2 && this.x - this.xMov == -1) {
-            return true;
-        }
-        else return false;
+        return this.y - this.yMov == 2 && this.x - this.xMov == -1;
     }
 
     public boolean isOpponent() {
