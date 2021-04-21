@@ -34,4 +34,19 @@ class RookTest {
         assertFalse( b.move("a2", "g2"));
     }
 
+    @Test
+    void shouldEatIfOpponentInOneMovement() {
+        ChessBoard b = new ChessBoard();
+        assertEquals( "white-rook", b.show("a1"));
+        assertTrue(b.move("a2", "a4"));
+        assertTrue(b.move("a1", "a3"));
+        assertEquals( "white-rook", b.show("a3"));
+        assertTrue(b.move("a3", "h3"));
+        assertEquals( "black-pawn", b.show("h7"));
+        assertTrue(b.move("h3", "h6"));
+        assertEquals( "white-rook", b.show("h6"));
+        assertTrue(b.move("h6", "h7"));
+        assertEquals( "white-rook", b.show("h7"));
+    }
+
 }
