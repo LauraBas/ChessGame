@@ -25,7 +25,26 @@ class BishopTest {
         b.move("d2", "d3");
         b.move("c1", "h6");
         assertFalse( b.move("h6", "f8"));
-        assertFalse( b.move("h6", "g7"));
+        assertFalse( b.move("h6", "d7"));
+    }
+
+    @Test
+    void shouldEatIfOpponent() {
+        ChessBoard b = new ChessBoard();
+        assertEquals( "white-bishop", b.show("c1"));
+        b.move("d2", "d3");
+        assertTrue(b.move("c1","h6"));
+        assertEquals( "white-bishop", b.show("h6"));
+        assertEquals( "black-pawn", b.show("g7"));
+        assertTrue(b.move("h6","g7"));
+        assertEquals( "white-bishop", b.show("g7"));
+    }
+
+    @Test
+    void shouldNotEatIfAllied() {
+        ChessBoard b = new ChessBoard();
+        assertEquals( "white-bishop", b.show("c1"));
+        assertFalse(b.move("c1","d2"));
 
     }
 
