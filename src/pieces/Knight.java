@@ -33,11 +33,11 @@ public class Knight implements Piece {
 
     }
     private boolean isPositionAvailable() {
-        return this.board.show(this.movement).equals("-") && isMovementAllowed();
+        return this.board.isSquareEmpty(this.movement) && isMovementAllowed();
     }
 
     public boolean canEat() {
-        return (isOpponent() && isMovementAllowed());
+        return (isOpponentInDestination() && isMovementAllowed());
 
     }
 
@@ -66,13 +66,7 @@ public class Knight implements Piece {
         return this.y - this.yMov == 2 && this.x - this.xMov == -1;
     }
 
-    public boolean isOpponent() {
-        String piece = this.board.show(this.movement);
-        if (!piece.equals("-")) {
-            String[] result = piece.split("-");
-            String opponent = result[0];
-            return !opponent.equals(this.color);
-        }
-        return false;
+    public boolean isOpponentInDestination() {
+        return !this.board.getColorAtSquare(this.movement).equals(this.color);
     }
 }

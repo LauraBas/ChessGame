@@ -51,20 +51,17 @@ public class Pawn implements Piece {
 
     }
 
-    public boolean isOpponent() {
-        String piece = this.board.show(this.movement);
-        String[] result = piece.split("-");
-        String opponent = result[0];
-        return !opponent.equals(this.color);
+    public boolean isOpponentInDestination() {
+        return !this.board.getColorAtSquare(this.movement).equals(this.color);
     }
     public boolean canEat() {
         if (isWhite()) {
-            return (isOpponent() && this.y - this.yMov == -1 && Math.abs(this.x - this.xMov) == 1);
-        } else return (isOpponent() && this.y - this.yMov == 1 && Math.abs(this.x - this.xMov) == 1);
+            return (isOpponentInDestination() && this.y - this.yMov == -1 && Math.abs(this.x - this.xMov) == 1);
+        } else return (isOpponentInDestination() && this.y - this.yMov == 1 && Math.abs(this.x - this.xMov) == 1);
     }
 
     private boolean isPositionAvailable() {
-        return this.board.show(this.movement).equals("-");
+        return this.board.isSquareEmpty(this.movement);
     }
 
     private boolean isWhite() {

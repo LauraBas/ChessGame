@@ -1,5 +1,9 @@
 package board;
 
 public interface Board {
-    public String show(String position);
+    String show(String position);
+
+    boolean isSquareEmpty(String movement);
+
+    String getColorAtSquare(String movement);
 }

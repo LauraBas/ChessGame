@@ -27,14 +27,12 @@ public class Bishop implements Piece{
         this.board = board;
     }
 
-
-
     public boolean canMove() {
         return isPositionAvailable() || canEat();
     }
 
     public boolean canEat() {
-        return (isOpponent() && isMovementAllowed());
+        return (isOpponentInDestination() && isMovementAllowed());
     }
 
     private boolean isMovementAllowed() {
@@ -51,7 +49,7 @@ public class Bishop implements Piece{
                         String a = String.valueOf(x);
                         String b = String.valueOf(y);
                         String box1 = a + b;
-                        isEmptyBox = this.board.show(box1).equals("-");
+                        isEmptyBox = this.board.isSquareEmpty(box1);
                     }
                     return isEmptyBox;
 
@@ -65,7 +63,7 @@ public class Bishop implements Piece{
                         String a = String.valueOf(x);
                         String b = String.valueOf(y);
                         String box1 = a + b;
-                        isEmptyBox = this.board.show(box1).equals("-");
+                        isEmptyBox = this.board.isSquareEmpty(box1);
                     }
                     return isEmptyBox;
                 }
@@ -78,7 +76,7 @@ public class Bishop implements Piece{
                         String a = String.valueOf(x);
                         String b = String.valueOf(y);
                         String box1 = a + b;
-                        isEmptyBox = this.board.show(box1).equals("-");
+                        isEmptyBox = this.board.isSquareEmpty(box1);
                     }
                     return isEmptyBox;
 
@@ -92,7 +90,7 @@ public class Bishop implements Piece{
                         String a = String.valueOf(x);
                         String b = String.valueOf(y);
                         String box1 = a + b;
-                        isEmptyBox = this.board.show(box1).equals("-");
+                        isEmptyBox = this.board.isSquareEmpty(box1);
                     }
                     return isEmptyBox;
                 }
@@ -102,7 +100,7 @@ public class Bishop implements Piece{
     }
 
     private boolean isFinalPositionAllowed() {
-        return this.board.show(this.movement).equals("-") || isOpponent();
+        return this.board.isSquareEmpty(this.movement) || isOpponentInDestination();
     }
 
     private boolean isOneMovement() {
@@ -110,16 +108,13 @@ public class Bishop implements Piece{
     }
 
     private boolean isPositionAvailable() {
-        return this.board.show(this.movement).equals("-") && isMovementAllowed();
+        return this.board.isSquareEmpty(this.movement) && isMovementAllowed();
     }
 
-    public boolean isOpponent() {
-        String piece = this.board.show(this.movement);
-        if (!piece.equals("-")) {
-            String[] result = piece.split("-");
-            String opponent = result[0];
-            return !opponent.equals(this.color);
-        }
-        return false;
+    public boolean isOpponentInDestination() {
+       if(this.board.isSquareEmpty(this.movement)) {
+           return false;
+       }
+        return !this.board.getColorAtSquare(this.movement).equals(this.color);
     }
 }

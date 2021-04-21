@@ -6,7 +6,7 @@ import pieces.PieceFactory;
 import java.util.HashMap;
 
 public class ChessBoard implements Board {
-    HashMap<String, String> board_dict;
+    private HashMap<String, String> board_dict;
 
     public ChessBoard() {
         board_dict = new HashMap<>();
@@ -51,6 +51,18 @@ public class ChessBoard implements Board {
             return "-";
         }
         return board_dict.get(position);
+    }
+
+    public boolean isSquareEmpty( String position) {
+        return board_dict.get(position) == null;
+    }
+    public String getColorAtSquare(String position) {
+        if(!isSquareEmpty(position)) {
+            String pieceData = board_dict.get(position);
+            String[] result = pieceData.split("-");
+            return result[0];
+        }
+        return"-";
     }
 
     public boolean move(String position, String movement) {
