@@ -48,4 +48,13 @@ class BishopTest {
 
     }
 
+    @Test
+    void shouldNotMoveIfOpponentInThePath() {
+        ChessBoard b = new ChessBoard();
+        b.move("d2", "d3");
+        b.move("g7", "g5");
+        assertEquals( "black-pawn", b.show("g5"));
+        assertFalse(b.move("c1", "h6"));
+    }
+
 }

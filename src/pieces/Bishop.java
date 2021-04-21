@@ -42,40 +42,58 @@ public class Bishop implements Piece{
             if (Math.abs(this.x - this.xMov) == 1  && Math.abs(this.y - this.yMov) == 1) {
                 return true;
             } else {
-                while (this.x < this.xMov && this.y < this.yMov) {
-                    this.x += 1;
-                    this.y += 1;
-                    String a = String.valueOf(x);
-                    String b = String.valueOf(y);
-                    String box1 = a + b;
-                    return this.board.show(box1).equals("-");
+                if(this.x < this.xMov && this.y < this.yMov) {
+                    boolean isEmptyBox = true;
+                    while (this.x < this.xMov && this.y < this.yMov && isEmptyBox) {
+                        this.x += 1;
+                        this.y += 1;
+                        String a = String.valueOf(x);
+                        String b = String.valueOf(y);
+                        String box1 = a + b;
+                        isEmptyBox = this.board.show(box1).equals("-");
+                    }
+                    return isEmptyBox;
+
                 }
 
-                while (this.x > this.xMov && this.y > this.yMov) {
-                    this.x -= 1;
-                    this.y -= 1;
-                    String c = String.valueOf(x);
-                    String d = String.valueOf(y);
-                    String box2 = c + d;
-                    return this.board.show(box2).equals("-");
+                if(this.x > this.xMov && this.y > this.yMov) {
+                    boolean isEmptyBox = true;
+                    while (this.x > this.xMov && this.y > this.yMov) {
+                        this.x -= 1;
+                        this.y -= 1;
+                        String a = String.valueOf(x);
+                        String b = String.valueOf(y);
+                        String box1 = a + b;
+                        isEmptyBox = this.board.show(box1).equals("-");
+                    }
+                    return isEmptyBox;
                 }
 
-                while (this.x > this.xMov  && this.y < this.yMov) {
-                    this.x -= 1;
-                    this.y += 1;
-                    String e = String.valueOf(x);
-                    String f = String.valueOf(y);
-                    String box3 = e + f;
-                    return this.board.show(box3).equals("-");
+                if (this.x > this.xMov  && this.y < this.yMov) {
+                    boolean isEmptyBox = true;
+                    while(this.x > this.xMov  && this.y < this.yMov && isEmptyBox) {
+                        this.x -= 1;
+                        this.y += 1;
+                        String a = String.valueOf(x);
+                        String b = String.valueOf(y);
+                        String box1 = a + b;
+                        isEmptyBox = this.board.show(box1).equals("-");
+                    }
+                    return isEmptyBox;
+
                 }
 
-                while (this.x < this.xMov && this.y > this.yMov) {
-                    this.x += 1;
-                    this.y -= 1;
-                    String g = String.valueOf(x);
-                    String h = String.valueOf(y);
-                    String box4 = g + h;
-                    return this.board.show(box4).equals("-");
+                if (this.x < this.xMov && this.y > this.yMov) {
+                    boolean isEmptyBox = true;
+                    while (this.x < this.xMov && this.y > this.yMov && isEmptyBox) {
+                        this.x += 1;
+                        this.y -= 1;
+                        String a = String.valueOf(x);
+                        String b = String.valueOf(y);
+                        String box1 = a + b;
+                        isEmptyBox = this.board.show(box1).equals("-");
+                    }
+                    return isEmptyBox;
                 }
 
             }
