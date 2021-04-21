@@ -15,6 +15,9 @@ public class PieceFactory  {
         if (result[1].equals("bishop")) {
             return new Bishop(position, movement, color, board);
         }
+        if (result[1].equals("rook")) {
+            return new Rook(position, movement, color, board);
+        }
         throw new Error("No piece found!!! BAD ERROR");
     }
 
