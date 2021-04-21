@@ -39,10 +39,11 @@ public class Bishop implements Piece{
 
     private boolean isMovementAllowed() {
         if (this.board.show(this.movement).equals("-") || isOpponent()) {
-            if (Math.abs(this.x - this.xMov) == 1  && Math.abs(this.y - this.yMov) == 1) {
+            if (isOneMovement()) {
                 return true;
-            } else {
-                if(this.x < this.xMov && this.y < this.yMov) {
+            }
+            if(!isOneMovement()){
+                if (this.x < this.xMov && this.y < this.yMov) {
                     boolean isEmptyBox = true;
                     while (this.x < this.xMov && this.y < this.yMov && isEmptyBox) {
                         this.x += 1;
@@ -56,7 +57,7 @@ public class Bishop implements Piece{
 
                 }
 
-                if(this.x > this.xMov && this.y > this.yMov) {
+                if (this.x > this.xMov && this.y > this.yMov) {
                     boolean isEmptyBox = true;
                     while (this.x > this.xMov && this.y > this.yMov) {
                         this.x -= 1;
@@ -103,6 +104,11 @@ public class Bishop implements Piece{
         return false;
 
     }
+
+    private boolean isOneMovement() {
+        return Math.abs(this.x - this.xMov) == 1 && Math.abs(this.y - this.yMov) == 1;
+    }
+
     private boolean isPositionAvailable() {
         return this.board.show(this.movement).equals("-") && isMovementAllowed();
     }
