@@ -38,7 +38,7 @@ public class Bishop implements Piece{
     }
 
     private boolean isMovementAllowed() {
-        if (this.board.show(this.movement).equals("-") || isOpponent()) {
+        if (isFinalPositionAllowed()) {
             if (isOneMovement()) {
                 return true;
             }
@@ -96,13 +96,13 @@ public class Bishop implements Piece{
                     }
                     return isEmptyBox;
                 }
-
             }
-
         }
-
         return false;
+    }
 
+    private boolean isFinalPositionAllowed() {
+        return this.board.show(this.movement).equals("-") || isOpponent();
     }
 
     private boolean isOneMovement() {
