@@ -1,6 +1,7 @@
 package pieces;
 
 import board.Board;
+import movements.Move;
 
 public class Piece implements IPiece{
     String position;

@@ -1,15 +1,22 @@
 package pieces;
 
 import board.ChessBoard;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class KnightTest {
+    ChessBoard b;
+
+    @BeforeEach
+    void setUp() {
+       b = new ChessBoard();
+       b.init();
+    }
 
     @Test
     void shouldMovePieceAndReturnTrueIfMovementIsAllowed() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-knight", b.show("g1"));
         assertEquals( "-", b.show("f3"));
         assertTrue(b.move("g1", "f3"));
@@ -28,7 +35,6 @@ class KnightTest {
 
     @Test
     void shouldReturnFalseIfMovementIsNotAllowed() {
-        ChessBoard b = new ChessBoard();
         assertFalse( b.move("g1", "e2"));
         assertFalse( b.move("g1", "g3"));
 

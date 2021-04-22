@@ -1,6 +1,7 @@
 package pieces;
 
 import board.ChessBoard;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,9 +9,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class BishopTest {
 
+    ChessBoard b;
+
+    @BeforeEach
+    void setUp() {
+        b = new ChessBoard();
+        b.init();
+    }
+
     @Test
     void shouldMovePieceAndReturnTrueIfMovementIsAllowed() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-bishop", b.show("c1"));
         b.move("d2", "d3");
         assertTrue(b.move("c1","f4"));
@@ -21,7 +29,6 @@ class BishopTest {
 
     @Test
     void shouldReturnFalseIfMovementIsNotAllowed() {
-        ChessBoard b = new ChessBoard();
         b.move("d2", "d3");
         b.move("c1", "h6");
         assertFalse( b.move("h6", "f8"));
@@ -29,7 +36,6 @@ class BishopTest {
 
     @Test
     void shouldEatIfOpponent() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-bishop", b.show("c1"));
         b.move("d2", "d3");
         assertTrue(b.move("c1","h6"));
@@ -46,7 +52,6 @@ class BishopTest {
 
     @Test
     void shouldNotEatIfAlly() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-bishop", b.show("c1"));
         assertFalse(b.move("c1","d2"));
 
@@ -54,7 +59,6 @@ class BishopTest {
 
     @Test
     void shouldNotMoveIfOpponentInThePath() {
-        ChessBoard b = new ChessBoard();
         b.move("d2", "d3");
         b.move("g7", "g5");
         assertEquals( "black-pawn", b.show("g5"));
@@ -63,7 +67,6 @@ class BishopTest {
 
     @Test
     void shouldEatIfOpponentInDestination() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-bishop", b.show("f1"));
         b.move("e2", "e3");
         assertTrue(b.move("a7","a6"));

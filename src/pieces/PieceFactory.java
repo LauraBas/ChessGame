@@ -1,6 +1,10 @@
 package pieces;
 
 import board.Board;
+import movements.DiagonalMovements;
+import movements.KnightMovements;
+import movements.PawnMovements;
+import movements.StraightMovements;
 
 public class PieceFactory  {
 

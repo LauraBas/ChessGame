@@ -1,6 +1,7 @@
 package pieces;
 
 import board.ChessBoard;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,9 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 class RookTest {
+
+    ChessBoard b;
+
+    @BeforeEach
+    void setUp() {
+        b = new ChessBoard();
+        b.init();
+    }
+
     @Test
     void shouldReturnTrueIfMovementIsAllowed() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-rook", b.show("a1"));
         assertTrue(b.move("a2", "a4"));
         assertTrue(b.move("a1", "a3"));
@@ -25,7 +34,6 @@ class RookTest {
 
     @Test
     void shouldReturnFalseIfMovementIsNotAllowed() {
-        ChessBoard b = new ChessBoard();
         assertTrue(b.move("a2", "a4"));
         assertTrue(b.move("a1", "a3"));
         assertEquals( "white-rook", b.show("a3"));
@@ -36,7 +44,6 @@ class RookTest {
 
     @Test
     void shouldEatIfOpponentInOneMovement() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-rook", b.show("a1"));
         assertTrue(b.move("a2", "a4"));
         assertTrue(b.move("a1", "a3"));
@@ -51,7 +58,6 @@ class RookTest {
 
     @Test
     void shouldEatIfOpponent() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-rook", b.show("a1"));
         assertTrue(b.move("a2", "a4"));
         assertTrue(b.move("a1", "a3"));
@@ -67,7 +73,6 @@ class RookTest {
 
     @Test
     void shouldNotEatIfAlly() {
-        ChessBoard b = new ChessBoard();
         assertEquals( "white-rook", b.show("a1"));
         assertFalse(b.move("a1","b1"));
         assertFalse(b.move("a1","a2"));
