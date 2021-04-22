@@ -4,22 +4,21 @@ import board.Board;
 
 public class PieceFactory  {
 
-    public Piece getPiece(String[] result, String position, String movement, Board board) {
+    public Piece getPiece(String[] result, String position, Board board) {
         String color = result[0];
         if (result[1].equals("pawn")) {
-            return new Pawn(position, movement, color, board);
+            return new Piece(position, color, board, new PawnMovements());
         }
         if (result[1].equals("knight")) {
-            return new Knight(position, movement, color, board);
+            return new Piece(position, color, board, new KnightMovements());
         }
         if (result[1].equals("bishop")) {
-            return new Bishop(position, movement, color, board);
+            return new Piece(position, color, board, new DiagonalMovements());
         }
-        if (result[1].equals("rook")) {
-            return new Rook(position, movement, color, board);
-        }
+       if (result[1].equals("rook")) {
+            return new Piece(position, color, board, new StraightMovements());
+      }
         throw new Error("No piece found!!! BAD ERROR");
     }
-
 
 }

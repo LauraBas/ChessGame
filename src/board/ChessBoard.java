@@ -69,8 +69,8 @@ public class ChessBoard implements Board {
       String pieceData = board_dict.get(position);
       String[] result = pieceData.split("-");
       PieceFactory pieceFactory =  new PieceFactory();
-      Piece piece =  pieceFactory.getPiece(result,  position, movement, this);
-          if (piece.canMove()) {
+      Piece piece =  pieceFactory.getPiece(result,  position, this);
+          if (piece.canMove(movement)) {
               board_dict.remove(position, pieceData);
               board_dict.put(movement, pieceData);
               return true;
