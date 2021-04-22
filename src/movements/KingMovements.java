@@ -17,8 +17,7 @@ public class KingMovements implements Move {
 
         if (isPositionAvailable(board, movement) && isOneMovement(x, xMov, y, yMov)) {
             return true;
-        }
-        return false;
+        } else return isOpponentInDestination(board, movement, color) && isOneMovement(x, xMov, y, yMov);
     }
 
     public boolean isOpponentInDestination(Board board, String movement, String color) {

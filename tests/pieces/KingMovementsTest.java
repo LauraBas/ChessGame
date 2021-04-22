@@ -37,5 +37,24 @@ class KingMovementsTest {
         assertFalse(b.move("d6", "d3"));
     }
 
+    @Test
+    void shouldEatIfOpponent() {
+        ChessBoard b = new ChessBoard();
+        b.set("d6", "black-king");
+        b.set("d5", "white-rook");
+        assertTrue(b.move("d6","d5"));
+        assertEquals("black-king", b.show("d5"));
+    }
+
+    @Test
+    void shouldNotEatIfAlly() {
+        ChessBoard b = new ChessBoard();
+        b.set("d6", "black-king");
+        b.set("d5", "black-rook");
+        assertFalse(b.move("d6","d5"));
+        assertEquals("black-rook", b.show("d5"));
+        assertEquals("black-king", b.show("d6"));
+    }
+
 
 }
