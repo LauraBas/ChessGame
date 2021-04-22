@@ -81,4 +81,8 @@ public class ChessBoard implements Board {
         board_dict.put("g7", "black-pawn");
         board_dict.put("h7", "black-pawn");
     }
+
+    public void set(String position, String piece) {
+        board_dict.put(position, piece);
+    }
 }
