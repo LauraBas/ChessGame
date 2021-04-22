@@ -43,7 +43,7 @@ public class Bishop implements Piece{
             if(!isOneMovement()){
                 if (this.x < this.xMov && this.y < this.yMov) {
                     boolean isEmptyBox = true;
-                    while (this.x < this.xMov && this.y < this.yMov && isEmptyBox) {
+                    while (this.x < this.xMov - 1 && this.y < this.yMov - 1 && isEmptyBox) {
                         this.x += 1;
                         this.y += 1;
                         String a = String.valueOf(x);
@@ -57,7 +57,7 @@ public class Bishop implements Piece{
 
                 if (this.x > this.xMov && this.y > this.yMov) {
                     boolean isEmptyBox = true;
-                    while (this.x > this.xMov && this.y > this.yMov) {
+                    while (this.x > this.xMov + 1 && this.y > this.yMov + 1) {
                         this.x -= 1;
                         this.y -= 1;
                         String a = String.valueOf(x);
@@ -70,7 +70,7 @@ public class Bishop implements Piece{
 
                 if (this.x > this.xMov  && this.y < this.yMov) {
                     boolean isEmptyBox = true;
-                    while(this.x > this.xMov  && this.y < this.yMov && isEmptyBox) {
+                    while(this.x > this.xMov - 1  && this.y < this.yMov - 1  && isEmptyBox) {
                         this.x -= 1;
                         this.y += 1;
                         String a = String.valueOf(x);
@@ -84,7 +84,7 @@ public class Bishop implements Piece{
 
                 if (this.x < this.xMov && this.y > this.yMov) {
                     boolean isEmptyBox = true;
-                    while (this.x < this.xMov && this.y > this.yMov && isEmptyBox) {
+                    while (this.x < this.xMov + 1 && this.y > this.yMov + 1 && isEmptyBox) {
                         this.x += 1;
                         this.y -= 1;
                         String a = String.valueOf(x);

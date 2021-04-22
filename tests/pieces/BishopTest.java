@@ -25,7 +25,6 @@ class BishopTest {
         b.move("d2", "d3");
         b.move("c1", "h6");
         assertFalse( b.move("h6", "f8"));
-        assertFalse( b.move("h6", "d7"));
     }
 
     @Test
@@ -38,6 +37,11 @@ class BishopTest {
         assertEquals( "black-pawn", b.show("g7"));
         assertTrue(b.move("h6","g7"));
         assertEquals( "white-bishop", b.show("g7"));
+        b.move("d7", "d5");
+        b.move("d5", "d4");
+        assertEquals( "black-pawn", b.show("d4"));
+        assertTrue(b.move("g7", "d4"));
+        assertEquals( "white-bishop", b.show("d4"));
     }
 
     @Test
@@ -56,5 +60,21 @@ class BishopTest {
         assertEquals( "black-pawn", b.show("g5"));
         assertFalse(b.move("c1", "h6"));
     }
+
+    @Test
+    void shouldEatIfOpponentInDestination() {
+        ChessBoard b = new ChessBoard();
+        assertEquals( "white-bishop", b.show("f1"));
+        b.move("e2", "e3");
+        assertTrue(b.move("a7","a6"));
+        assertTrue(b.move("f1","a6"));
+        assertEquals( "white-bishop", b.show("a6"));
+        assertTrue(b.move("d7","d5"));
+        assertTrue(b.move("d5","d4"));
+        assertTrue(b.move("d4","d3"));
+        assertTrue(b.move("a6","d3"));
+
+    }
+
 
 }
