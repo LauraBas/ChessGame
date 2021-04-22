@@ -1,10 +1,7 @@
 package pieces;
 
 import board.Board;
-import movements.DiagonalMovements;
-import movements.KnightMovements;
-import movements.PawnMovements;
-import movements.StraightMovements;
+import movements.*;
 
 public class PieceFactory  {
 
@@ -21,7 +18,10 @@ public class PieceFactory  {
         }
        if (result[1].equals("rook")) {
             return new Piece(position, color, board, new StraightMovements());
-      }
+       }
+        if (result[1].equals("king")) {
+            return new Piece(position, color, board, new KingMovements());
+        }
         throw new Error("No piece found!!! BAD ERROR");
     }
 
