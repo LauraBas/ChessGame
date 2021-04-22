@@ -21,12 +21,15 @@ public class Piece implements IPiece{
     }
 
     public boolean canMove(String movement){
+        boolean move = true;
         for (int i = 0; i < this.list.size(); i++) {
-           while(this.list.get(i).isMovementAllowed(this.position, movement, this.board, this.color)){
+           if(this.list.get(i).isMovementAllowed(this.position, movement, this.board, this.color)){
                return true;
+           } else {
+               move = false;
            }
         }
-        return false;
+        return move;
 
     }
 }

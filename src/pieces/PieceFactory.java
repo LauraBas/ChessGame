@@ -37,7 +37,12 @@ public class PieceFactory  {
             listKing.add(new KingMovements());
             return new Piece(position, color, board, listKing);
         }
-
+        if (result[1].equals("queen")) {
+            List<Move> listQueen= new ArrayList<Move>();
+            listQueen.add(new StraightMovements());
+            listQueen.add(new DiagonalMovements());
+            return new Piece(position, color, board, listQueen);
+        }
         throw new Error("No piece found!!! BAD ERROR");
     }
 

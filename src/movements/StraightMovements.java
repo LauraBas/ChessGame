@@ -80,7 +80,7 @@ public class StraightMovements implements Move {
     }
 
     private boolean isOneMovement(char x, char xMov, int y, int yMov) {
-        return Math.abs(x - xMov) == 1 || Math.abs(y - yMov) == 1;
+        return Math.abs(x - xMov) == 1 && Math.abs(y - yMov) == 1;
     }
 
     public boolean isOpponentInDestination(Board board, String movement, String color) {
