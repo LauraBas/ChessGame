@@ -7,104 +7,86 @@ import static java.lang.Integer.parseInt;
 public class DiagonalMovements implements Move {
     @Override
     public boolean isMovementAllowed(String position, String movement, Board board, String color) {
-
-        String[] positionData;
-        positionData = position.split("");
-        char x = positionData[0].charAt(0);
-        int y = parseInt(positionData[1]);
-        String[] movementData = movement.split("");
-        char xMov = movementData[0].charAt(0);
-        int yMov = parseInt(movementData[1]);
-        return  canMove(x, xMov, y,yMov, board,  movement, color);
-    }
-    public boolean canMove(char x, char xMov,int y,int yMov, Board board, String movement, String color) {
-        return isPositionAvailable(x, xMov, y,yMov, board,  movement, color) || canEat(x, xMov, y,yMov, board,  movement, color);
+        return canMove(
+                parseX(position),
+                parseX(movement),
+                parseY(position),
+                parseY(movement),
+                board,
+                movement,
+                color
+        );
     }
 
-    public boolean canEat(char x, char xMov,int y,int yMov, Board board, String movement, String color) {
-        return (isOpponentInDestination(board, movement, color) && isMovementAllowed(x, xMov, y, yMov, board, movement, color));
+    public boolean canMove(char x, char xMov, int y, int yMov, Board board, String movement, String color) {
+        return isPositionAvailable(x, xMov, y, yMov, board, movement, color)
+                || canEat(x, xMov, y, yMov, board, movement, color);
     }
 
-    private boolean isMovementAllowed(char x, char xMov, int y, int yMov,Board board,String movement, String color) {
-        if (isFinalPositionAllowed(board, movement, color)) {
-            if (isOneMovement(x, xMov, y, yMov)) {
-                return true;
+    private boolean canEat(char x, char xMov, int y, int yMov, Board board, String movement, String color) {
+        return isOpponentInDestination(board, movement, color)
+                && isMovementAllowed(x, xMov, y, yMov, board, movement, color);
+    }
+
+    private char parseX(String position) {
+        String[] positionData = position.split("");
+        return positionData[0].charAt(0);
+    }
+
+    private int parseY(String position) {
+        String[] positionData = position.split("");
+        return parseInt(positionData[1]);
+    }
+
+    private boolean isMovementAllowed(char x, char xMov, int y, int yMov, Board board, String movement, String color) {
+        return isFinalPositionAllowed(board, movement, color)
+                && onSameDiagonal(x, y, xMov, yMov)
+                && noPiecesBetween(x, xMov, y, yMov, board);
+    }
+
+    private boolean noPiecesBetween(char x, char xMov, int y, int yMov, Board board) {
+        int xVector = getVector(x, xMov);
+        int yVector = getVector(y, yMov);
+        int xAttempt = (x + xVector);
+        int yAttempt = y + yVector;
+        while (xAttempt != xMov && yAttempt != y) {
+            String box = getPosition(xAttempt, yAttempt);
+            if (!board.isSquareEmpty(box)) {
+                return false;
             }
-            if(!isOneMovement(x, xMov, y, yMov)){
-                if (x < xMov && y < yMov) {
-                    boolean isEmptyBox = true;
-                    while (x < xMov - 1 && y < yMov - 1 && isEmptyBox) {
-                        x += 1;
-                        y += 1;
-                        String a = String.valueOf(x);
-                        String b = String.valueOf(y);
-                        String box1 = a + b;
-                        isEmptyBox = board.isSquareEmpty(box1);
-                    }
-                    return isEmptyBox;
-
-                }
-
-                if (x > xMov && y > yMov) {
-                    boolean isEmptyBox = true;
-                    while (x > xMov + 1 && y > yMov + 1) {
-                        x -= 1;
-                        y -= 1;
-                        String a = String.valueOf(x);
-                        String b = String.valueOf(y);
-                        String box1 = a + b;
-                        isEmptyBox = board.isSquareEmpty(box1);
-                    }
-                    return isEmptyBox;
-                }
-
-                if (x > xMov  && y < yMov) {
-                    boolean isEmptyBox = true;
-                    while(x > xMov - 1  && y < yMov - 1  && isEmptyBox) {
-                        x -= 1;
-                        y += 1;
-                        String a = String.valueOf(x);
-                        String b = String.valueOf(y);
-                        String box1 = a + b;
-                        isEmptyBox = board.isSquareEmpty(box1);
-                    }
-                    return isEmptyBox;
-
-                }
-
-                if (x < xMov && y > yMov) {
-                    boolean isEmptyBox = true;
-                    while (x < xMov + 1 && y > yMov + 1 && isEmptyBox) {
-                        x += 1;
-                        y -= 1;
-                        String a = String.valueOf(x);
-                        String b = String.valueOf(y);
-                        String box1 = a + b;
-                        isEmptyBox = board.isSquareEmpty(box1);
-                    }
-                    return isEmptyBox;
-                }
-            }
+            xAttempt += xVector;
+            yAttempt += yVector;
         }
-        return false;
+        return true;
+    }
+
+    private int getVector(int a, int b) {
+        return (b - a) / distance(a, b);
+    }
+
+    private int distance(int a, int b) {
+        return Math.abs(b - a);
+    }
+
+    private String getPosition(int xAttempt, int yAttempt) {
+        String a = String.valueOf((char) xAttempt);
+        String b = String.valueOf(yAttempt);
+        return a + b;
+    }
+
+    private boolean onSameDiagonal(char x, int y, char xMov, int yMov) {
+        return distance(xMov, x) == distance(y, yMov);
     }
 
     private boolean isFinalPositionAllowed(Board board, String movement, String color) {
         return board.isSquareEmpty(movement) || isOpponentInDestination(board, movement, color);
     }
 
-    private boolean isOneMovement(char x, char xMov, int y, int yMov) {
-        return Math.abs(x - xMov) == 1 && Math.abs(y - yMov) == 1;
+    private boolean isPositionAvailable(char x, char xMov, int y, int yMov, Board board, String movement, String color) {
+        return board.isSquareEmpty(movement) && isMovementAllowed(x, xMov, y, yMov, board, movement, color);
     }
 
-    private boolean isPositionAvailable(char x, char xMov,int y,int yMov, Board board, String movement, String color) {
-        return board.isSquareEmpty(movement) && isMovementAllowed(x, xMov, y,yMov, board,  movement, color);
-    }
-
-    public boolean isOpponentInDestination(Board board, String movement, String color) {
-        if(board.isSquareEmpty(movement)) {
-            return false;
-        }
-        return !board.getColorAtSquare(movement).equals(color);
+    public boolean isOpponentInDestination(Board board, String destination, String color) {
+        return !board.isSquareEmpty(destination) && !board.getColorAtSquare(destination).equals(color);
     }
 }

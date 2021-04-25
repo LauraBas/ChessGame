@@ -21,5 +21,16 @@ public class QueenTest {
         assertEquals("black-queen", b.show("h4"));
     }
 
+    @Test
+    void shouldReturnFalseIfMovementNotAllowed() {
+        ChessBoard b = new ChessBoard();
+        b.set("d6", "black-queen");
+        assertFalse(b.move("d6","e8"));
+    }
 
+    @Test
+    void shouldEatIfOpponent() {
+        ChessBoard b = new ChessBoard();
+        b.set("d6", "black-queen");
+    }
 }
