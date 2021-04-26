@@ -71,19 +71,19 @@ public class PawnMovements implements Move {
         return color.equals("white");
     }
 
-    private boolean canBlackMove(char x, char xMov, int y, int yMov) {
-        return (x == xMov) && (y - yMov == 1);
-    }
-
-    private boolean isBlackFirstMove(char x, char xMov, int y, int yMov) {
-        return (x == xMov) && y == 7 && yMov == 5;
+    private boolean isWhiteFirstMove(char x, char xMov, int y, int yMov) {
+        return (x == xMov) && y == 2 && yMov == 4;
     }
 
     private boolean canWhiteMove(char x, char xMov, int y, int yMov) {
         return (x == xMov) && (yMov - y == 1);
     }
 
-    private boolean isWhiteFirstMove(char x, char xMov, int y, int yMov) {
-        return (x == xMov) && y == 2 && yMov == 4;
+    private boolean canBlackMove(char x, char xMov, int y, int yMov) {
+        return (x == xMov) && (y - yMov == 1);
+    }
+
+    private boolean isBlackFirstMove(char x, char xMov, int y, int yMov) {
+        return (x == xMov) && y == 7 && yMov == 5;
     }
 }
