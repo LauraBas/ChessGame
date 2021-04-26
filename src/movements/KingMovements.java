@@ -20,9 +20,10 @@ public class KingMovements implements Move {
     }
 
     private boolean canMove(char x, char xMov, int y, int yMov, Board board, String movement, String color) {
-        if (isPositionAvailable(board, movement) && isOneMovement(x, xMov, y, yMov)) {
-            return true;
-        } else return isOpponentInDestination(board, movement, color) && isOneMovement(x, xMov, y, yMov);
+         if (isPositionAvailable(board, movement) && isOneMovement(x, xMov, y, yMov)) {
+             return true;
+         } else return isOpponentInDestination(board, movement, color)
+                && isOneMovement(x, xMov, y, yMov);
     }
 
     private char parseX(String position) {
@@ -44,6 +45,6 @@ public class KingMovements implements Move {
     }
 
     private boolean isOneMovement(char x, char xMov, int y, int yMov) {
-        return Math.abs(x - xMov) == 1 || x - xMov == 0   && Math.abs(y - yMov) == 1;
+        return Math.abs(x - xMov) <= 1 && Math.abs(y - yMov) <= 1;
     }
 }
