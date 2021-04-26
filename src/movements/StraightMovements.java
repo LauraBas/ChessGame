@@ -15,6 +15,7 @@ public class StraightMovements implements Move {
         char xMov = movementData[0].charAt(0);
         int yMov = parseInt(movementData[1]);
 
+
         if (isFinalPositionAllowed(movement, board, color)) {
             if (isOneMovement(x, xMov, y, yMov)) {
                 return true;
@@ -80,7 +81,7 @@ public class StraightMovements implements Move {
     }
 
     private boolean isOneMovement(char x, char xMov, int y, int yMov) {
-        return Math.abs(x - xMov) == 1 && Math.abs(y - yMov) == 1;
+        return (Math.abs(x - xMov) == 1 && y - yMov == 0) || (Math.abs(y - yMov) == 1 && x - xMov == 0);
     }
 
     public boolean isOpponentInDestination(Board board, String movement, String color) {
