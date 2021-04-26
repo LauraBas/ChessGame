@@ -108,5 +108,16 @@ class PawnTest {
         assertFalse(b.move("f4", "g5"));
     }
 
+    @Test
+    void shouldConvertPawnInQueenIfIsEndOfBoard() {
+        b = new ChessBoard();
+        b.set("a7", "white-pawn");
+        assertTrue(b.move("a7", "a8"));
+        assertEquals("white-queen",b.show("a8"));
+        b.set("d2", "black-pawn");
+        assertTrue(b.move("d2", "d1"));
+        assertEquals("black-queen",b.show("d1"));
+    }
+
 
 }

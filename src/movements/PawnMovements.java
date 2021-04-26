@@ -86,4 +86,5 @@ public class PawnMovements implements Move {
     private boolean isBlackFirstMove(char x, char xMov, int y, int yMov) {
         return (x == xMov) && y == 7 && yMov == 5;
     }
+
 }

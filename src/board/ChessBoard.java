@@ -37,9 +37,17 @@ public class ChessBoard implements Board {
         String[] result = pieceData.split("-");
         PieceFactory pieceFactory = new PieceFactory();
         Piece piece = pieceFactory.getPiece(result, position, this);
+
         if (piece.canMove(movement)) {
             board_dict.remove(position, pieceData);
             board_dict.put(movement, pieceData);
+            if (pieceData == "white-pawn" && movement.charAt(1) == '8'){
+                board_dict.put(movement, "white-queen");
+            }
+            if (pieceData == "black-pawn" && movement.charAt(1) == '1'){
+                board_dict.put(movement, "black-queen");
+            }
+
             return true;
         } else {
             return false;
