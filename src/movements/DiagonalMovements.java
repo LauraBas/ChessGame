@@ -18,7 +18,7 @@ public class DiagonalMovements implements Move {
         );
     }
 
-    public boolean canMove(char x, char xMov, int y, int yMov, Board board, String movement, String color) {
+    private boolean canMove(char x, char xMov, int y, int yMov, Board board, String movement, String color) {
         return isPositionAvailable(x, xMov, y, yMov, board, movement, color)
                 || canEat(x, xMov, y, yMov, board, movement, color);
     }
