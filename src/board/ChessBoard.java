@@ -41,10 +41,10 @@ public class ChessBoard implements Board {
         if (piece.canMove(movement)) {
             board_dict.remove(position, pieceData);
             board_dict.put(movement, pieceData);
-            if (pieceData == "white-pawn" && movement.charAt(1) == '8'){
+            if (canConvertWhitePawnInQueen(movement, pieceData)){
                 board_dict.put(movement, "white-queen");
             }
-            if (pieceData == "black-pawn" && movement.charAt(1) == '1'){
+            if (canConvertBlackPawnInQueen(movement, pieceData)){
                 board_dict.put(movement, "black-queen");
             }
 
@@ -52,6 +52,15 @@ public class ChessBoard implements Board {
         } else {
             return false;
         }
+    }
+
+    private boolean canConvertBlackPawnInQueen(String movement, String pieceData) {
+        return pieceData == "black-pawn" && movement.charAt(1) == '1';
+    }
+
+    private boolean canConvertWhitePawnInQueen(String movement, String pieceData) {
+        return pieceData == "white-pawn" && movement.charAt(1) == '8';
+
     }
 
     public void init() {
