@@ -8,6 +8,7 @@ public class StraightMovements implements Move {
     @Override
     public boolean isMovementAllowed(String position, String movement, Board board, String color) {
 
+
         String[] positionData = position.split("");
         char x = positionData[0].charAt(0);
         int y = parseInt(positionData[1]);

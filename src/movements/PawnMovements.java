@@ -8,14 +8,18 @@ import static java.lang.Integer.parseInt;
 public class PawnMovements implements Move {
     @Override
     public boolean isMovementAllowed(String position, String movement, Board board, String color) {
+        return canMove(
+                parseX(position),
+                parseX(movement),
+                parseY(position),
+                parseY(movement),
+                board,
+                movement,
+                color
+        );
+    }
 
-        String[] positionData;
-        positionData = position.split("");
-        char x = positionData[0].charAt(0);
-        int y = parseInt(positionData[1]);
-        String[] movementData =  movement.split("");
-        char xMov = movementData[0].charAt(0);
-        int yMov =  parseInt(movementData[1]);
+    private boolean canMove(char x, char xMov, int y, int yMov, Board board, String movement, String color){
 
         if (!isPositionAvailable(board, movement) && canEat(board, movement, color, x, xMov, y, yMov)) {
             return true;
@@ -37,13 +41,23 @@ public class PawnMovements implements Move {
         else {
             return false;
         }
-
     }
 
-    public boolean isOpponentInDestination(Board board, String movement, String color) {
+    private char parseX(String position) {
+        String[] positionData = position.split("");
+        return positionData[0].charAt(0);
+    }
+
+    private int parseY(String position) {
+        String[] positionData = position.split("");
+        return parseInt(positionData[1]);
+    }
+
+    private boolean isOpponentInDestination(Board board, String movement, String color) {
         return !board.getColorAtSquare(movement).equals(color);
     }
-    public boolean canEat(Board board, String movement, String color, char x, char xMov, int y, int yMov) {
+
+    private boolean canEat(Board board, String movement, String color, char x, char xMov, int y, int yMov) {
         if (isWhite(color)) {
             return (isOpponentInDestination(board, movement, color) && y - yMov == -1 && Math.abs(x - xMov) == 1);
         } else return (isOpponentInDestination(board, movement, color) && y - yMov == 1 && Math.abs(x - xMov) == 1);
@@ -72,5 +86,4 @@ public class PawnMovements implements Move {
     private boolean isWhiteFirstMove(char x, char xMov, int y, int yMov) {
         return (x == xMov) && y == 2 && yMov == 4;
     }
-
 }

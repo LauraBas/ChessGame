@@ -86,7 +86,7 @@ public class DiagonalMovements implements Move {
         return board.isSquareEmpty(movement) && isMovementAllowed(x, xMov, y, yMov, board, movement, color);
     }
 
-    public boolean isOpponentInDestination(Board board, String destination, String color) {
+    private boolean isOpponentInDestination(Board board, String destination, String color) {
         return !board.isSquareEmpty(destination) && !board.getColorAtSquare(destination).equals(color);
     }
 }
