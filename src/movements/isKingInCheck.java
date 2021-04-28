@@ -22,10 +22,13 @@ public class isKingInCheck {
             String pieceName = entry.getValue();
             PieceFactory pieceFactory = new PieceFactory();
             String[] result = pieceName.split("-");
-            Piece piece = pieceFactory.getPiece(result, position, board);
-            if (piece.canMove(kingPosition)) {
-                return true;
+            if(!result[0].equals(color)) {
+                Piece piece = pieceFactory.getPiece(result, position, board);
+                if (piece.canMove(kingPosition)) {
+                    return true;
+                }
             }
+
         }
         return false;
         }
