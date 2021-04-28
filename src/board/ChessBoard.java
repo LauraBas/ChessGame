@@ -33,6 +33,7 @@ public class ChessBoard implements Board {
         }
         return "-";
     }
+
     public HashMap<String, String> getBoard() {
         return board_dict;
     }
@@ -61,15 +62,6 @@ public class ChessBoard implements Board {
         } else {
             return false;
         }
-    }
-
-    private boolean canConvertBlackPawnInQueen(String movement, String pieceData) {
-        return pieceData == "black-pawn" && movement.charAt(1) == '1';
-    }
-
-    private boolean canConvertWhitePawnInQueen(String movement, String pieceData) {
-        return pieceData == "white-pawn" && movement.charAt(1) == '8';
-
     }
 
     public String getPiecePosition(String piece){
@@ -120,4 +112,15 @@ public class ChessBoard implements Board {
     public void set(String position, String piece) {
         board_dict.put(position, piece);
     }
+
+    private boolean canConvertBlackPawnInQueen(String movement, String pieceData) {
+        return pieceData == "black-pawn" && movement.charAt(1) == '1';
+    }
+
+    private boolean canConvertWhitePawnInQueen(String movement, String pieceData) {
+        return pieceData == "white-pawn" && movement.charAt(1) == '8';
+
+    }
+
+
 }
