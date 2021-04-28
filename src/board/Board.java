@@ -1,5 +1,7 @@
 package board;
 
+import java.util.HashMap;
+
 public interface Board {
     String show(String position);
 
@@ -8,4 +10,6 @@ public interface Board {
     String getColorAtSquare(String movement);
 
     String getPiecePosition(String king);
+
+    HashMap<String, String> getBoard();
 }

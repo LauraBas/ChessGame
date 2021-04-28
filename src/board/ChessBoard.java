@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class ChessBoard implements Board {
-    public HashMap<String, String> board_dict;
+    private HashMap<String, String> board_dict;
 
     public ChessBoard() {
         board_dict = new HashMap<>();
@@ -32,6 +32,9 @@ public class ChessBoard implements Board {
             return result[0];
         }
         return "-";
+    }
+    public HashMap<String, String> getBoard() {
+        return board_dict;
     }
 
     public boolean move(String position, String movement) {

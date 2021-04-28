@@ -1,14 +1,15 @@
 package movements;
 
-import board.ChessBoard;
+import board.Board;
 import pieces.Piece;
 import pieces.PieceFactory;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class isKingInCheck {
 
-    public boolean isInCheck(ChessBoard board, String color) {
+    public boolean isInCheck(Board board, String color) {
        String kingPosition = board.getPiecePosition(color + "-king");
         if(canEatKing(kingPosition, board, color)){
            return true;
@@ -16,8 +17,9 @@ public class isKingInCheck {
        return false;
     }
 
-    private boolean canEatKing(String kingPosition, ChessBoard board, String color) {
-        for (Map.Entry<String, String> entry : board.board_dict.entrySet()) {
+    private boolean canEatKing(String kingPosition, Board board, String color) {
+        HashMap<String, String> board_dict = board.getBoard();
+        for (Map.Entry<String, String> entry : board_dict.entrySet()) {
             String position = entry.getKey();
             String pieceName = entry.getValue();
             PieceFactory pieceFactory = new PieceFactory();
