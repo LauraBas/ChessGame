@@ -6,4 +6,6 @@ public interface Board {
     boolean isSquareEmpty(String movement);
 
     String getColorAtSquare(String movement);
+
+    String getPiecePosition(String king);
 }

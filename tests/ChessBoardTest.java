@@ -15,4 +15,14 @@ class ChessBoardTest {
         assertEquals( "-", b.show("a5"));
     }
 
+    @Test
+    void shouldNotMoveIfKingIsInCheck() {
+        ChessBoard b = new ChessBoard();
+        b.set("e2", "white-king");
+        b.set("d3", "white-pawn");
+        b.set("c4", "black-bishop");
+        assertFalse(b.move("d3","d4"));
+        assertEquals( "white-pawn", b.show("d3"));
+    }
+
 }

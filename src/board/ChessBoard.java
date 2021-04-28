@@ -1,12 +1,14 @@
 package board;
 
+import movements.King;
 import pieces.Piece;
 import pieces.PieceFactory;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ChessBoard implements Board {
-    private HashMap<String, String> board_dict;
+    public HashMap<String, String> board_dict;
 
     public ChessBoard() {
         board_dict = new HashMap<>();
@@ -41,13 +43,17 @@ public class ChessBoard implements Board {
         if (piece.canMove(movement)) {
             board_dict.remove(position, pieceData);
             board_dict.put(movement, pieceData);
+            King king = new King();
+            if (king.isInCheck(this, result[0])){
+                board_dict.put(position, pieceData);
+                return false;
+            }
             if (canConvertWhitePawnInQueen(movement, pieceData)){
                 board_dict.put(movement, "white-queen");
             }
             if (canConvertBlackPawnInQueen(movement, pieceData)){
                 board_dict.put(movement, "black-queen");
             }
-
             return true;
         } else {
             return false;
@@ -61,6 +67,15 @@ public class ChessBoard implements Board {
     private boolean canConvertWhitePawnInQueen(String movement, String pieceData) {
         return pieceData == "white-pawn" && movement.charAt(1) == '8';
 
+    }
+
+    public String getPiecePosition(String piece){
+        for(String key : board_dict.keySet()){
+            if(Objects.equals(board_dict.get(key), piece)){
+                return key;
+            }
+        }
+        return null;
     }
 
     public void init() {

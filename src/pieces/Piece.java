@@ -30,6 +30,6 @@ public class Piece implements IPiece{
            }
         }
         return move;
-
     }
+
 }
