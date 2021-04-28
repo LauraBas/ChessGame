@@ -6,7 +6,7 @@ import pieces.PieceFactory;
 
 import java.util.Map;
 
-public class King {
+public class isKingInCheck {
 
     public boolean isInCheck(ChessBoard board, String color) {
        String kingPosition = board.getPiecePosition(color + "-king");

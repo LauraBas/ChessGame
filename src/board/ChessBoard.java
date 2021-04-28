@@ -1,6 +1,6 @@
 package board;
 
-import movements.King;
+import movements.isKingInCheck;
 import pieces.Piece;
 import pieces.PieceFactory;
 
@@ -43,7 +43,7 @@ public class ChessBoard implements Board {
         if (piece.canMove(movement)) {
             board_dict.remove(position, pieceData);
             board_dict.put(movement, pieceData);
-            King king = new King();
+            isKingInCheck king = new isKingInCheck();
             if (king.isInCheck(this, result[0])){
                 board_dict.put(position, pieceData);
                 return false;
