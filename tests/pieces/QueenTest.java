@@ -10,6 +10,7 @@ public class QueenTest {
     void shouldReturnTrueIfMovementIsAllowed() {
         ChessBoard b = new ChessBoard();
         b.set("d6", "black-queen");
+        b.set("d8", "black-king");
         assertTrue(b.move("d6", "b8"));
         assertTrue(b.move("b8", "b5"));
         assertTrue(b.move("b5", "h5"));
